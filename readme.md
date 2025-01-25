@@ -42,3 +42,5 @@
 ### TODO
 [] Also copy the requirements.txt to the repo along with the consumers
 [] Preparing some app to showcase
+[] turn the label in the action to array to call multiple files in order for having a multiple consumer type thingy
+[] clearing the message or the issue
