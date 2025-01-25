@@ -64,3 +64,9 @@ class GithubManager:
         os.chdir(self.repo_name)
         Git.push(self.origin,"updated workflows")
         os.chdir("..")
+
+    def produce(self,title,body,labels):
+        repo_name = urlparse(self.repo_url).path.strip('/').split(".")[0]
+        github = Github(self.auth_token)
+        repo = github.get_repo(repo_name)
+        repo.create_issue(title,body,labels=labels)

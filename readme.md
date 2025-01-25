@@ -34,7 +34,11 @@
 ### Steps
 1. add github access token to the package
 2. generate labels
-3. map labels to consumer script
+3. map labels to consumer script and create the lables in the github
 4. generate the github actions script
 5. ask the user to create a empty github repo. And tell him to copy the http url
 6. use the http url and publish the urls to the repo online using github of the user
+
+### TODO
+[] Also copy the requirements.txt to the repo along with the consumers
+[] Preparing some app to showcase
