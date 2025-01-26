@@ -1,0 +1,48 @@
+name: Process Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  process-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies (if present)
+        run: |
+          LABEL=${{ github.event.issue.labels[0].name }}
+          if [ -f "consumers/${LABEL}/requirements.txt" ]; then
+            echo "requirements.txt found, installing dependencies..."
+            pip install -r "consumers/${LABEL}/requirements.txt"
+          else
+            echo "No requirements.txt found."
+          fi
+
+      - name: Run pre_run.sh script (if present)
+        run: |
+          LABEL=${{ github.event.issue.labels[0].name }}
+          if [ -f "consumers/${LABEL}/pre_run.sh" ]; then
+            echo "pre_run.sh found, executing..."
+            chmod +x "consumers/${LABEL}/pre_run.sh"  # Ensure it’s executable
+            ./consumers/${LABEL}/pre_run.sh           # Run the script
+          else
+            echo "No pre_run.sh found."
+          fi
+
+      - name: Run consumer
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          LABEL=${{ github.event.issue.labels[0].name }}
+          python consumers/${LABEL}/main.py

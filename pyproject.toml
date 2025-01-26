@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "githubmq"
+version = "0.1.0"
+dependencies = [
+    "click>=8.0.0",
+]
+
+[project.scripts]
+githubmq = "githubmq.cli:cli"
+
+[tool.setuptools]
+packages = ["githubmq"]
+package-dir = {"" = "src"}
