@@ -1,6 +1,6 @@
 ### setting up the workers with cli
 ```bash
-setup --repo-url "https://github.com/ArnabChatterjee20k/github-queue-test.git" --auth-token "<get it from github personal access token>" --origin "main"
+githubmq setup --repo-url "https://github.com/ArnabChatterjee20k/github-queue-test.git" --auth-token "<get it from github personal access token>" --origin "main"
 ```
 If getting error consumers folder does not exists
 Format - consumers/{label}/main.py

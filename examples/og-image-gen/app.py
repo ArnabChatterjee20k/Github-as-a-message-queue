@@ -1,8 +1,8 @@
 from flask import Flask, render_template, redirect, request, url_for
 import uuid
 import redis
-from utils import produce
-import os
+from utils import produce , generate_url_hash
+import os,time
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -22,7 +22,10 @@ def index():
     if request.method == 'POST':
         website_url = request.form['website_url']
         # Produce an event to the GitHub message queue
-        uid = produce(website_url)
+        uid = generate_url_hash(website_url)
+        if r.get(uid):
+            return redirect(url_for('view_website', uuid=uid))    
+        res = produce(uid,website_url)
         # Save UUID and website URL to Redis
         r.set(uid, "producing...")
         # Redirect to the UUID page
