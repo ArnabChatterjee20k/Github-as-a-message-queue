@@ -5,7 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "githubmq"
 version = "0.1.0"
+
 dependencies = [
+    "requests>=2.20.0",
+    "PyGithub>=1.54.1",
+    "python-dotenv>=0.21.0",
     "click>=8.0.0",
 ]
 
