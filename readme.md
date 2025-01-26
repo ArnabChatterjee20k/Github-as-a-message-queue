@@ -1,3 +1,8 @@
+# Working
+```
+pip install -e .
+```
+Move to examples. The whole  process is depicted how we can easily build a complex event driven easily
 # Idea
 ## Producer-Consumer Strategy:
 ### Producer:
