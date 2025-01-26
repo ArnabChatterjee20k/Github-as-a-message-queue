@@ -17,6 +17,16 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Cache Python dependencies
+        id: cache-python-deps
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ github.event.issue.labels[0].name }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Install dependencies (if present)
         run: |
           LABEL=${{ github.event.issue.labels[0].name }}
