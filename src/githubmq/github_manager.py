@@ -13,7 +13,6 @@ class GithubManager:
         self.repo_url = repo_url
         self.origin = origin
         self.repo_name = get_repo_name(self.repo_url)
-        clone_repo(self.repo_url)
 
     def create_labels(self):
         repo_name = urlparse(self.repo_url).path.strip('/').split(".")[0]
@@ -40,6 +39,7 @@ class GithubManager:
             example -> consumer/sentiment_calculate/main.py
             when an issue sentiment_calculate is published the main.py would be called
         """
+        clone_repo(self.repo_url)
         consumers_dir = "consumers"
         if not Path(consumers_dir).exists():
             raise Exception("Create consumers directory. ex-> consumers/label_name/main.py")
@@ -56,6 +56,7 @@ class GithubManager:
         """
             update the workflow file
         """
+        clone_repo(self.repo_url)
         current_package = __name__.split('.')[0]
         workflows_dir = pkg_resources.files(current_package).joinpath("workflows")
         repo_workflows_dir = os.path.join(self.repo_name, '.github', 'workflows')
